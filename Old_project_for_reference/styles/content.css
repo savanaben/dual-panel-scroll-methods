@@ -1,0 +1,180 @@
+/* Content Styling */
+.column-content h1 {
+    text-align: center;
+    margin-bottom: calc(20px * var(--zoom-factor));
+    color: #333;
+}
+
+.column-content h2 {
+    text-align: center;
+    margin-bottom: calc(30px * var(--zoom-factor));
+    color: #666;
+    font-size: 0.9em;
+}
+
+.column-content p {
+    margin-bottom: calc(20px * var(--zoom-factor));
+    line-height: 1.4;
+    color: #333;
+}
+
+/* Textarea Styling */
+.column-content textarea {
+    width: 100%;
+    margin: calc(15px * var(--zoom-factor)) 0;
+    padding: calc(10px * var(--zoom-factor));
+    border: calc(1px * var(--zoom-factor)) solid #ccc;
+    border-radius: calc(var(--base-border-radius) * var(--zoom-factor));
+    font-family: inherit;
+    font-size: inherit;
+    line-height: 1.3;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.column-content textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 calc(2px * var(--zoom-factor)) rgba(0, 123, 255, 0.25);
+}
+
+/* MCQ Options Styling */
+.mcq-options-container {
+    margin: 20px 0;
+}
+
+.mcq-option {
+    margin-bottom: 11.4px;
+    padding: 0;
+    border: 1px solid #adb5bd;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.mcq-option-letter-radio {
+    display: flex;
+    align-items: center;
+    padding: 14px 15px;
+    background-color: rgb(214, 235, 255);
+    border-right: 1px solid #dee2e6;
+}
+
+.mcq-option-letter {
+    font-weight: bold;
+    margin-right: 12px;
+}
+
+.mcq-option-radio-visual {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #000;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+}
+
+.mcq-option-text {
+    flex-grow: 1;
+    padding: 14px 15px;
+}
+
+.eliminate-choice-btn {
+    background-color: white;
+    border: none;
+    border-radius: 0;
+    width: 53px;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 0;
+    flex-shrink: 0;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ec-dash-wrapper {
+    width: 22px;
+    height: 22px;
+    border: 1px solid #676767;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.eliminate-choice-btn:hover {
+    background-color: #e9ecef;
+}
+
+.dimmed-choice {
+    opacity: 0.5;
+    background-color: #f8f9fa;
+}
+
+.dimmed-choice .mcq-option-letter-radio {
+    background-color: #dbe6f0;
+}
+
+.dimmed-choice .eliminate-choice-btn {
+    background-color: #e9ecef;
+    color: #adb5bd;
+    cursor: not-allowed;
+}
+
+/* Clear Answer Button */
+.clear-answer-btn {
+    box-sizing: border-box;
+    min-width: 0px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    font-family: Calibri;
+    line-height: 1;
+    font-size: calc(22px);
+    z-index: 200;
+    padding: 8px 12px;
+    color: rgb(36, 120, 204);
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(144, 144, 144);
+    margin-top: 19px;
+    gap: calc(8px);
+    transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, color 0.2s;
+    border-radius: calc(4px);
+}
+
+.clear-answer-btn:hover {
+    background-color: #f8f9fa;
+}
+
+/* Submit Container */
+.submit-container {
+    padding: 23px 30px 30px 30px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 9px;
+    border-top: 1px solid #dee2e6;
+    margin-top: 20px;
+}
+
+.submit-btn {
+    background-color: #2478cc;
+    font-size: 22.8px;
+    color: white;
+    border: none;
+    padding: 11px 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.submit-btn:hover {
+    background-color: #1e5aa3;
+} 

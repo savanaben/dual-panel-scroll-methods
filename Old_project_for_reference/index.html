@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Isometric Zoom Layout</title>
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/buttons.css">
+    <link rel="stylesheet" href="styles/content.css">
+</head>
+<body>
+        <!-- Sticky Top Toolbar -->
+    <div class="top-toolbar"></div>
+    
+    <!-- Outer Container for Horizontal Scrolling -->
+    <div class="outer-container">
+        <!-- Main Content Container -->
+        <div class="content-container">
+            <!-- Left Column -->
+            <div class="column left-column">
+                <div class="column-content" id="leftContent">
+                    <!-- Content will be loaded here -->
+                </div>
+                <div class="scroll-indicator-container">
+                    <button class="scroll-indicator more-btn" id="leftMoreBtn">
+                        <span>More</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M21.5 17.5l-9.5-9.5-9.5 9.5-2.5-2.5 12-12 12 12-2.5 2.5z"></path>
+                        </svg>
+                    </button>
+                    <button class="scroll-indicator top-btn" id="leftTopBtn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M21.5 17.5l-9.5-9.5-9.5 9.5-2.5-2.5 12-12 12 12-2.5 2.5z"></path>
+                        </svg>
+                        <span>Top</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Right Column -->
+            <div class="column right-column">
+                <div class="column-content" id="rightContent">
+                    <!-- Content will be loaded here -->
+                </div>
+                <div class="scroll-indicator-container">
+                    <button class="scroll-indicator more-btn" id="rightMoreBtn">
+                        <span>More</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M21.5 17.5l-9.5-9.5-9.5 9.5-2.5-2.5 12-12 12 12-2.5 2.5z"></path>
+                        </svg>
+                    </button>
+                    <button class="scroll-indicator top-btn" id="rightTopBtn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M21.5 17.5l-9.5-9.5-9.5 9.5-2.5-2.5 12-12 12 12-2.5 2.5z"></path>
+                        </svg>
+                        <span>Top</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Zoom Controls -->
+    <div class="zoom-controls">
+        <button id="zoomInBtn" class="zoom-btn">Zoom In</button>
+        <button id="zoomOutBtn" class="zoom-btn">Zoom Out</button>
+        <button id="resetZoomBtn" class="zoom-btn">Reset</button>
+        <button id="toggleMethodBtn" class="zoom-btn">Method 2</button>
+        <span id="zoomLevel">100%</span>
+    </div>
+
+    <!-- Sticky Scrollbars for Method 2 -->
+    <div id="leftStickyScrollbar" class="sticky-scrollbar">
+        <div class="sticky-scrollbar-track">
+            <div class="sticky-scrollbar-thumb" id="leftStickyThumb"></div>
+    </div>
+    </div>
+    
+    <div id="rightStickyScrollbar" class="sticky-scrollbar">
+        <div class="sticky-scrollbar-track">
+            <div class="sticky-scrollbar-thumb" id="rightStickyThumb"></div>
+        </div>
+</div>
+
+    <script src="js/scroll-indicators.js"></script>
+    <script src="js/sticky-scrollbars.js"></script>
+    <script src="js/zoom-controller.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,266 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* CSS Variables for zoom scaling */
+:root {
+    --zoom-factor: 1;
+    --base-font-size: 22.8px;
+    --base-line-height: 1.1;
+    --base-padding: 26.66px;
+    --base-padding-horizontal: 46.66px;
+    --base-width: 1366px;
+    --base-border-radius: 4px;
+    --base-button-size: 63px;
+    --base-button-font-size: 19px;
+}
+
+body, html {
+    height: 100%;
+    font-size: calc(var(--base-font-size) * var(--zoom-factor));
+    line-height: var(--base-line-height);
+    font-family: Calibri, Arial, sans-serif;
+    overflow: hidden; /* Prevent body scroll */
+}
+
+/* Sticky Top Toolbar */
+.top-toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background-color: #ececec;
+    z-index: 1000;
+}
+
+/* Outer Container for Horizontal Scrolling */
+.outer-container {
+    position: fixed;
+    top: 120px; /* Below toolbar */
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* Method 1: Simple transform-based scaling with outer scroll container */
+.method-1 .outer-container {
+    overflow: auto; /* Allow scrolling in both directions when content exceeds viewport */
+}
+
+/* Method 2: CSS variable-based scaling with controlled scrolling */
+.method-2 .outer-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+/* Main Content Container - Responsive Height, Scalable Width */
+.content-container {
+    background-color: #ffffff;
+    display: flex;
+    overflow: hidden;
+}
+
+/* Method 1: CSS variable-based scaling with simpler behavior */
+.method-1 .content-container {
+    position: relative;
+    width: calc(var(--base-width) * var(--zoom-factor));
+    /* Height will be set dynamically by JavaScript */
+    min-width: calc(var(--base-width) * var(--zoom-factor));
+}
+
+/* Method 2: CSS variable-based scaling with advanced features */
+.method-2 .content-container {
+    position: relative;
+    width: calc(var(--base-width) * var(--zoom-factor));
+    /* Height will be set dynamically by JavaScript */
+    /* Ensure the container acts as a single unit for horizontal scrolling */
+    min-width: calc(var(--base-width) * var(--zoom-factor));
+}
+
+/* Column Layout */
+.column {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    /* Height will be set dynamically by JavaScript */
+}
+
+.left-column {
+    flex: 0 0 60%; /* 60% width */
+    border-right: calc(1px * var(--zoom-factor)) solid #ccc;
+}
+
+.right-column {
+    flex: 0 0 40%; /* 40% width */
+}
+
+/* Column Content Area */
+.column-content {
+    flex: 1;
+    position: relative;
+}
+
+/* Method 1: Fixed padding, uses normal scrollbars */
+.method-1 .column-content {
+    padding: 26.66px 46.66px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Method 2: Scalable padding via CSS variables */
+.method-2 .column-content {
+    padding: calc(var(--base-padding) * var(--zoom-factor)) calc(var(--base-padding-horizontal) * var(--zoom-factor));
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Hide original scrollbars for Method 2 by default */
+.method-2 .column-content::-webkit-scrollbar {
+    display: none;
+}
+
+/* Show native scrollbar for left column when both columns visible in Method 2 */
+.method-2 .show-native-scrollbar .column-content::-webkit-scrollbar {
+    display: block;
+    width: 18px;
+}
+
+.method-2 .show-native-scrollbar .column-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.method-2 .show-native-scrollbar .column-content::-webkit-scrollbar-thumb {
+    background: #1e3a8a;
+    border-radius: 4px;
+}
+
+.method-2 .show-native-scrollbar .column-content::-webkit-scrollbar-thumb:hover {
+    background: #1e40af;
+}
+
+/* Original scrollbar styling for Method 1 */
+.method-1 .column-content::-webkit-scrollbar {
+    width: 18px;
+}
+
+.method-1 .column-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.method-1 .column-content::-webkit-scrollbar-thumb {
+    background: #1e3a8a;
+    border-radius: 4px;
+}
+
+.method-1 .column-content::-webkit-scrollbar-thumb:hover {
+    background: #1e40af;
+}
+
+/* Outer container scrollbar for horizontal scrolling */
+.outer-container::-webkit-scrollbar {
+    width: 18px;
+    height: 18px;
+}
+
+.outer-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.outer-container::-webkit-scrollbar-thumb {
+    background: #1e3a8a;
+    border-radius: 4px;
+}
+
+.outer-container::-webkit-scrollbar-thumb:hover {
+    background: #1e40af;
+}
+
+/* Zoom Controls */
+.zoom-controls {
+    position: fixed;
+    top: 130px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1001;
+}
+
+.zoom-btn {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.zoom-btn:hover {
+    background-color: #0056b3;
+}
+
+#zoomLevel {
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    background-color: #f8f9fa;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+}
+
+/* Sticky Scrollbars for Method 2 */
+.sticky-scrollbar {
+    position: fixed;
+    right: 0;
+    top: 120px; /* Below toolbar */
+    width: 18px;
+    background: #f1f1f1;
+    border-left: 1px solid #ccc;
+    z-index: 1002;
+    display: none; /* Hidden by default */
+}
+
+.sticky-scrollbar-track {
+    width: 100%;
+    height: 100%;
+    background: #f1f1f1;
+    position: relative;
+}
+
+.sticky-scrollbar-thumb {
+    width: 100%;
+    background: #1e3a8a;
+    border-radius: 2px;
+    position: absolute;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.sticky-scrollbar-thumb:hover {
+    background: #1e40af;
+}
+
+.sticky-scrollbar.visible {
+    display: block;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 1400px) {
+    .content-container {
+        width: 100vw; /* Fill full width on smaller screens */
+        /* Height will be set dynamically by JavaScript */
+    }
+    
+    .outer-container {
+        overflow-x: hidden; /* Hide horizontal scroll on small screens */
+    }
+} 

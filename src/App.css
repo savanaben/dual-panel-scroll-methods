@@ -1,0 +1,1026 @@
+/* CSS Variables for zoom scaling */
+:root {
+  --zoom-factor: 1;
+  --base-font-size: 22.8px;
+  --base-line-height: 1.1;
+  --base-padding: 26.66px;
+  --base-padding-horizontal: 46.66px;
+  --base-width: 1366px;
+  --base-border-radius: 4px;
+  --base-button-size: 63px;
+  --base-button-font-size: 19px;
+}
+
+.app {
+  height: 100vh;
+  font-size: calc(var(--base-font-size) * var(--zoom-factor));
+  line-height: var(--base-line-height);
+  font-family: Calibri, Arial, sans-serif;
+  overflow: hidden; /* Prevent body scroll */
+}
+
+/* Global spacing for paragraphs and headings */
+p, h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 24px;
+}
+
+/* Outer Container for Horizontal Scrolling */
+.outer-container {
+  position: fixed;
+  top: 120px; /* Below toolbar */
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* Current: Unified scrolling with shared scrollbars */
+.current .outer-container {
+  overflow: auto; /* Allow scrolling in both directions when content exceeds viewport */
+  box-sizing: border-box; /* Include any borders in size calculations */
+}
+
+/* Inner Frame: Same as Current but with inner scrollable frame */
+.inner-frame .outer-container {
+  overflow: auto; /* Allow scrolling in both directions when content exceeds viewport */
+  box-sizing: border-box; /* Include any borders in size calculations */
+}
+
+/* Method 1: Simple transform-based scaling with outer scroll container */
+.method-1 .outer-container {
+  overflow: auto; /* Allow scrolling in both directions when content exceeds viewport */
+}
+
+/* Method 2: CSS variable-based scaling with controlled scrolling */
+.method-2 .outer-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Main Content Container - Responsive Height, Scalable Width */
+.content-container {
+  background-color: #ffffff;
+  display: flex;
+  overflow: hidden;
+}
+
+/* Current: Unified scrolling with shared scrollbars */
+.current .content-container {
+  position: relative;
+  width: calc(var(--base-width) * var(--zoom-factor) - 18px); /* Account for vertical scrollbar */
+  min-width: calc(var(--base-width) * var(--zoom-factor) - 18px); /* Account for vertical scrollbar */
+  min-height: 100%; /* Minimum height of viewport, but can expand */
+  height: auto; /* Allow content to determine height */
+  overflow: visible; /* Allow content to expand beyond viewport */
+}
+
+/* Accordions: Same scrolling behavior as Current */
+.accordions .outer-container {
+  overflow: auto; /* Allow scrolling in both directions when content exceeds viewport */
+  box-sizing: border-box; /* Include any borders in size calculations */
+}
+
+/* Accordions: Same content container behavior as Current */
+.accordions .content-container {
+  position: relative;
+  width: calc(var(--base-width) * var(--zoom-factor) - 18px); /* Account for vertical scrollbar */
+  min-width: calc(var(--base-width) * var(--zoom-factor) - 18px); /* Account for vertical scrollbar */
+  min-height: 100%; /* Minimum height of viewport, but can expand */
+  height: auto; /* Allow content to determine height */
+  overflow: visible; /* Allow content to expand beyond viewport */
+}
+
+/* Tabs: Same scrolling behavior as Current */
+.tabs .outer-container {
+  overflow: auto; /* Allow scrolling in both directions when content exceeds viewport */
+  box-sizing: border-box; /* Include any borders in size calculations */
+}
+
+/* Tabs: Same content container behavior as Current */
+.tabs .content-container {
+  position: relative;
+  width: calc(var(--base-width) * var(--zoom-factor) - 18px); /* Account for vertical scrollbar */
+  min-width: calc(var(--base-width) * var(--zoom-factor) - 18px); /* Account for vertical scrollbar */
+  min-height: 100%; /* Minimum height of viewport, but can expand */
+  height: auto; /* Allow content to determine height */
+  overflow: visible; /* Allow content to expand beyond viewport */
+}
+
+/* Inner Frame: Allow content to expand for right column scrolling */
+.inner-frame .content-container {
+  position: relative;
+  width: calc(var(--base-width) * var(--zoom-factor) - 18px); /* Account for vertical scrollbar */
+  min-width: calc(var(--base-width) * var(--zoom-factor) - 18px); /* Account for vertical scrollbar */
+  min-height: 100vh; /* Minimum height of viewport */
+  height: auto; /* Allow content to determine height */
+  overflow: visible; /* Allow content to expand beyond viewport */
+}
+
+/* Method 1: CSS variable-based scaling with simpler behavior */
+.method-1 .content-container {
+  position: relative;
+  width: calc(var(--base-width) * var(--zoom-factor));
+  min-width: calc(var(--base-width) * var(--zoom-factor));
+}
+
+/* Method 2: CSS variable-based scaling with advanced features */
+.method-2 .content-container {
+  position: relative;
+  width: calc(var(--base-width) * var(--zoom-factor));
+  min-width: calc(var(--base-width) * var(--zoom-factor));
+}
+
+/* Column Layout */
+.column {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Current: Allow columns to expand to content height */
+.current .column {
+  overflow: visible; /* Allow content to expand beyond viewport */
+}
+
+/* Inner Frame: Make left column sticky, right column scrolls with outer container */
+.inner-frame .column {
+  overflow: visible; /* Allow content to expand beyond viewport */
+}
+
+.inner-frame .left-column {
+  position: sticky;
+  top: 0;
+  height: 0px; /* Collapse to content height - allows scrollable inner frame to control height */
+  align-self: flex-start; /* Prevent stretching */
+}
+
+.left-column {
+  flex: 0 0 60%; /* 60% width */
+  border-right: calc(1px * var(--zoom-factor)) solid #ccc;
+}
+
+.right-column {
+  flex: 0 0 40%; /* 40% width */
+}
+
+/* Column Content Area */
+.column-content {
+  flex: 1;
+  position: relative;
+}
+
+/* Current: No individual scrolling - let outer container handle all scrolling */
+.current .column-content {
+  padding: calc(var(--base-padding) * var(--zoom-factor)) calc(var(--base-padding-horizontal) * var(--zoom-factor));
+  overflow: visible; /* No individual scrolling */
+  height: auto; /* Let content determine height */
+  min-height: auto; /* Remove any minimum height constraints */
+}
+
+/* Inner Frame: Same as Current */
+.inner-frame .column-content {
+  padding: calc(var(--base-padding) * var(--zoom-factor)) calc(var(--base-padding-horizontal) * var(--zoom-factor));
+  overflow: visible; /* No individual scrolling */
+  height: auto; /* Let content determine height */
+  min-height: auto; /* Remove any minimum height constraints */
+}
+
+/* Scrollable inner frame for Inner Frame mode left column */
+.inner-frame .scrollable-inner-frame {
+  height: calc(100vh - 120px); /* Viewport height minus toolbar height */
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: calc(1px * var(--zoom-factor)) solid #e0e0e0;
+  border-radius: calc(var(--base-border-radius) * var(--zoom-factor));
+  background-color: #fafafa;
+  padding: calc(var(--base-padding) * var(--zoom-factor)) calc(var(--base-padding-horizontal) * var(--zoom-factor));
+  box-sizing: border-box;
+  /* Negative margins to counteract column-content padding */
+  margin-top: calc(-1 * var(--base-padding) * var(--zoom-factor));
+  margin-bottom: calc(-1 * var(--base-padding) * var(--zoom-factor));
+  margin-left: calc(-1 * var(--base-padding-horizontal) * var(--zoom-factor));
+  margin-right: calc(-1 * var(--base-padding-horizontal) * var(--zoom-factor));
+}
+
+/* Custom scrollbar styling for the inner frame */
+.inner-frame .scrollable-inner-frame::-webkit-scrollbar {
+  width: calc(18px * var(--zoom-factor));
+}
+
+.inner-frame .scrollable-inner-frame::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: calc(var(--base-border-radius) * var(--zoom-factor));
+}
+
+.inner-frame .scrollable-inner-frame::-webkit-scrollbar-thumb {
+  background: #1e3a8a;
+  border-radius: calc(var(--base-border-radius) * var(--zoom-factor));
+}
+
+.inner-frame .scrollable-inner-frame::-webkit-scrollbar-thumb:hover {
+  background: #1e40af;
+}
+
+/* Method 1: Scalable padding via CSS variables */
+.method-1 .column-content {
+  padding: calc(var(--base-padding) * var(--zoom-factor)) calc(var(--base-padding-horizontal) * var(--zoom-factor));
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Method 2: Scalable padding via CSS variables */
+.method-2 .column-content {
+  padding: calc(var(--base-padding) * var(--zoom-factor)) calc(var(--base-padding-horizontal) * var(--zoom-factor));
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* Reserve space for scrollbar to prevent reflow when it appears/disappears */
+  padding-right: calc(calc(var(--base-padding-horizontal) * var(--zoom-factor)) + 18px);
+}
+
+/* Hide original scrollbars for Method 2 by default */
+.method-2 .column-content::-webkit-scrollbar {
+  display: none;
+}
+
+/* Show native scrollbar for columns when needed in Method 2 */
+.method-2 .show-native-scrollbar .column-content {
+  /* When scrollbar is visible, use normal padding (no extra 18px) */
+  padding: calc(var(--base-padding) * var(--zoom-factor)) calc(var(--base-padding-horizontal) * var(--zoom-factor));
+}
+
+.method-2 .show-native-scrollbar .column-content::-webkit-scrollbar {
+  display: block;
+  width: 18px;
+}
+
+.method-2 .show-native-scrollbar .column-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.method-2 .show-native-scrollbar .column-content::-webkit-scrollbar-thumb {
+  background: #1e3a8a;
+  border-radius: 4px;
+}
+
+.method-2 .show-native-scrollbar .column-content::-webkit-scrollbar-thumb:hover {
+  background: #1e40af;
+}
+
+.method-2 .show-native-scrollbar .column-content::-webkit-scrollbar-button:vertical:start:decrement {
+  display: block;
+  height: 18px;
+  background: #e0e0e0;
+  border: 1px solid #ccc;
+}
+
+.method-2 .show-native-scrollbar .column-content::-webkit-scrollbar-button:vertical:end:increment {
+  display: block;
+  height: 18px;
+  background: #e0e0e0;
+  border: 1px solid #ccc;
+}
+
+.method-2 .show-native-scrollbar .column-content::-webkit-scrollbar-button:hover {
+  background: #d0d0d0;
+}
+
+/* Accordions: Same as Current mode */
+.accordions .column {
+  overflow: visible; /* Allow content to expand beyond viewport */
+}
+
+.accordions .column-content {
+  padding: calc(var(--base-padding) * var(--zoom-factor)) calc(var(--base-padding-horizontal) * var(--zoom-factor));
+  overflow: visible; /* No individual scrolling */
+  height: auto; /* Let content determine height */
+}
+
+/* Tabs: Same as Current mode */
+.tabs .column {
+  overflow: visible; /* Allow content to expand beyond viewport */
+}
+
+.tabs .column-content {
+  padding: calc(var(--base-padding) * var(--zoom-factor)) calc(var(--base-padding-horizontal) * var(--zoom-factor));
+  overflow: visible; /* No individual scrolling */
+  height: auto; /* Let content determine height */
+}
+
+/* Accordion Component Styles */
+.accordion {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  background: #fff;
+}
+
+.accordion-header {
+  width: 100%;
+  padding: 12px 16px;
+  background: #f8f9fa;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: inherit;
+  font-family: inherit;
+  transition: background-color 0.2s ease;
+}
+
+.accordion-header:hover {
+  background: #e9ecef;
+}
+
+.accordion-header:focus {
+  outline: 2px solid #007bff;
+  outline-offset: -2px;
+}
+
+.accordion-title {
+  font-weight: 600;
+  color: #333;
+}
+
+.accordion-icon {
+  transition: transform 0.2s ease;
+  color: #666;
+  font-size: 12px;
+}
+
+.accordion-icon.expanded {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.accordion-content.expanded {
+  max-height: 2000px; /* Large enough to accommodate content */
+}
+
+.accordion-body {
+  padding: 16px;
+}
+
+/* Tabs Component Styles */
+.tabs-container {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.tabs-header {
+  display: flex;
+  border-bottom: 1px solid #ddd;
+  background: #f8f9fa;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  border-right: 1px solid #ddd;
+  cursor: pointer;
+  font-size: inherit;
+  font-family: inherit;
+  transition: background-color 0.2s ease;
+  color: #666;
+}
+
+.tab-button:last-child {
+  border-right: none;
+}
+
+.tab-button:hover {
+  background: #e9ecef;
+}
+
+.tab-button.active {
+  background: #fff;
+  color: #333;
+  font-weight: 600;
+  border-bottom: 2px solid #007bff;
+}
+
+.tab-button:focus {
+  outline: 2px solid #007bff;
+  outline-offset: -2px;
+}
+
+.tabs-content {
+  position: relative;
+}
+
+.tab-panel {
+  display: none;
+  padding: 16px;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+/* Placeholder Image Styles */
+.placeholder-image {
+  width: 400px;
+  height: 300px; /* 4:3 aspect ratio */
+  background-color: #e0e0e0;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  margin-bottom: 16px;
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Original scrollbar styling for Method 1 */
+.method-1 .column-content::-webkit-scrollbar {
+  width: 18px;
+}
+
+.method-1 .column-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.method-1 .column-content::-webkit-scrollbar-thumb {
+  background: #1e3a8a;
+  border-radius: 4px;
+}
+
+.method-1 .column-content::-webkit-scrollbar-thumb:hover {
+  background: #1e40af;
+}
+
+.method-1 .column-content::-webkit-scrollbar-button:vertical:start:decrement {
+  display: block;
+  height: 18px;
+  background: #e0e0e0;
+  border: 1px solid #ccc;
+}
+
+.method-1 .column-content::-webkit-scrollbar-button:vertical:end:increment {
+  display: block;
+  height: 18px;
+  background: #e0e0e0;
+  border: 1px solid #ccc;
+}
+
+.method-1 .column-content::-webkit-scrollbar-button:hover {
+  background: #d0d0d0;
+}
+
+/* Outer container scrollbar for horizontal scrolling */
+.outer-container::-webkit-scrollbar {
+  width: 18px;
+  height: 18px;
+}
+
+.outer-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.outer-container::-webkit-scrollbar-thumb {
+  background: #1e3a8a;
+  border-radius: 4px;
+}
+
+.outer-container::-webkit-scrollbar-thumb:hover {
+  background: #1e40af;
+}
+
+.outer-container::-webkit-scrollbar-button:horizontal:start:decrement {
+  display: block;
+  width: 18px;
+  height: 18px;
+  background: #e0e0e0;
+  border: 1px solid #ccc;
+}
+
+.outer-container::-webkit-scrollbar-button:horizontal:end:increment {
+  display: block;
+  width: 18px;
+  height: 18px;
+  background: #e0e0e0;
+  border: 1px solid #ccc;
+}
+
+.outer-container::-webkit-scrollbar-button:hover {
+  background: #d0d0d0;
+}
+
+/* Sticky Top Toolbar */
+.top-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background-color: #ececec;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.toolbar-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+}
+
+.mode-selector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mode-selector label {
+  font-weight: 500;
+  color: #333;
+  font-size: 24px;
+}
+
+.mode-dropdown {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* New layout sections */
+.explainer-section {
+  flex: 0 0 70%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+}
+
+.explainer-text {
+  font-size: 16px;
+  color: #393939;
+  line-height: 1.25;
+  max-width: 100%;
+}
+
+.controls-section {
+  flex: 0 0 30%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.zoom-btn {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.zoom-btn:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.zoom-btn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.zoom-level {
+  padding: 8px 12px;
+  font-size: 12px;
+  text-align: center;
+  min-width: 120px;
+}
+
+.zoom-level div {
+  margin: 2px 0;
+}
+
+/* Sticky Scrollbars for Method 2 */
+.method-2 .sticky-scrollbar {
+  position: fixed;
+  right: 0;
+  top: 120px; /* Below toolbar */
+  width: 18px;
+  background: #f1f1f1;
+  border-left: 1px solid #ccc;
+  z-index: 1002;
+  display: none; /* Hidden by default */
+}
+
+/* Hide sticky scrollbars completely for other methods */
+.current .sticky-scrollbar {
+  display: none !important;
+}
+
+.method-1 .sticky-scrollbar {
+  display: none !important;
+}
+
+.sticky-scrollbar-track {
+  width: 100%;
+  height: 100%;
+  background: #f1f1f1;
+  position: relative;
+}
+
+.sticky-scrollbar-thumb {
+  width: 100%;
+  background: #1e3a8a;
+  border-radius: 4px;
+  position: absolute;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.sticky-scrollbar-thumb:hover {
+  background: #1e40af;
+}
+
+.method-2 .sticky-scrollbar.visible {
+  display: block;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 1400px) {
+  .content-container {
+    width: 100vw; /* Fill full width on smaller screens */
+  }
+  
+  .outer-container {
+    overflow-x: hidden; /* Hide horizontal scroll on small screens */
+  }
+}
+
+/* Filler Component Styles */
+.filler-container {
+  background-color: #f5f5f5;
+  border: calc(1px * var(--zoom-factor)) solid #ddd;
+  border-radius: calc(8px * var(--zoom-factor));
+  padding: calc(20px * var(--zoom-factor));
+  margin: calc(10px * var(--zoom-factor)) 0;
+}
+
+.filler-top-section {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: calc(24px * var(--zoom-factor));
+  margin-bottom: calc(24px * var(--zoom-factor));
+}
+
+.filler-left-panel {
+  display: flex;
+  flex-direction: column;
+  gap: calc(15px * var(--zoom-factor));
+}
+
+.filler-right-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.filler-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: calc(5px * var(--zoom-factor));
+}
+
+.filler-label {
+  font-weight: 600;
+  color: #333;
+  font-size: calc(14px * var(--zoom-factor));
+  font-family: Calibri, Arial, sans-serif;
+}
+
+.filler-dropdown {
+  padding: calc(8px * var(--zoom-factor)) calc(12px * var(--zoom-factor));
+  border: calc(1px * var(--zoom-factor)) solid #ccc;
+  border-radius: calc(4px * var(--zoom-factor));
+  background-color: white;
+  font-size: calc(14px * var(--zoom-factor));
+  color: #333;
+  font-family: Calibri, Arial, sans-serif;
+}
+
+.filler-dropdown:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 calc(2px * var(--zoom-factor)) rgba(0, 123, 255, 0.25);
+}
+
+.filler-image-placeholder {
+  width: calc(350px * var(--zoom-factor));
+  height: calc(350px * var(--zoom-factor));
+  background-color: #e9ecef;
+  border: calc(2px * var(--zoom-factor)) solid #adb5bd;
+  border-radius: calc(8px * var(--zoom-factor));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filler-placeholder-text {
+  color: #6c757d;
+  font-size: calc(14px * var(--zoom-factor));
+  font-weight: 500;
+  font-family: Calibri, Arial, sans-serif;
+}
+
+.filler-bottom-section {
+  width: 100%;
+}
+
+.filler-table-title {
+  margin: 0 0 calc(15px * var(--zoom-factor)) 0;
+  font-size: calc(18px * var(--zoom-factor));
+  font-weight: 600;
+  color: #333;
+  font-family: Calibri, Arial, sans-serif;
+}
+
+.filler-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: calc(8px * var(--zoom-factor));
+  overflow: hidden;
+  box-shadow: 0 calc(2px * var(--zoom-factor)) calc(4px * var(--zoom-factor)) rgba(0, 0, 0, 0.1);
+}
+
+.filler-table-header {
+  background-color: #f8f9fa;
+}
+
+.filler-table-header th {
+  padding: calc(12px * var(--zoom-factor)) calc(15px * var(--zoom-factor));
+  text-align: left;
+  font-weight: bold;
+  color: #333;
+  border-bottom: calc(2px * var(--zoom-factor)) solid #dee2e6;
+  font-size: calc(20px * var(--zoom-factor));
+  font-family: Calibri, Arial, sans-serif;
+}
+
+.filler-table tbody tr {
+  border-bottom: calc(1px * var(--zoom-factor)) solid #dee2e6;
+}
+
+.filler-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.filler-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.filler-table td {
+  padding: calc(10px * var(--zoom-factor)) calc(15px * var(--zoom-factor));
+  font-size: calc(20px * var(--zoom-factor));
+  color: #333;
+  font-family: Calibri, Arial, sans-serif;
+}
+
+/* MC Component Styles */
+.mc-component h1 {
+  text-align: center;
+  margin-bottom: calc(20px * var(--zoom-factor));
+  color: #333;
+  font-family: Calibri, Arial, sans-serif;
+}
+
+.mc-component h2 {
+  text-align: center;
+  margin-bottom: calc(30px * var(--zoom-factor));
+  color: #666;
+  font-size: calc(0.9em * var(--zoom-factor));
+  font-family: Calibri, Arial, sans-serif;
+}
+
+.mc-component p {
+  margin-bottom: calc(20px * var(--zoom-factor));
+  line-height: 1.4;
+  color: #333;
+  font-family: Calibri, Arial, sans-serif;
+}
+
+.mc-component textarea {
+  width: 100%;
+  margin: calc(15px * var(--zoom-factor)) 0;
+  padding: calc(10px * var(--zoom-factor));
+  border: calc(1px * var(--zoom-factor)) solid #ccc;
+  border-radius: calc(var(--base-border-radius) * var(--zoom-factor));
+  font-family: Calibri, Arial, sans-serif;
+  font-size: inherit;
+  line-height: 1.3;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.mc-component textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 calc(2px * var(--zoom-factor)) rgba(0, 123, 255, 0.25);
+}
+
+.mcq-options-container {
+  margin: calc(20px * var(--zoom-factor)) 0;
+}
+
+.mcq-option {
+  margin-bottom: calc(11.4px * var(--zoom-factor));
+  padding: 0;
+  border: calc(1px * var(--zoom-factor)) solid #adb5bd;
+  border-radius: calc(5px * var(--zoom-factor));
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  overflow: hidden;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.mcq-option:hover {
+  background-color: #f8f9fa;
+}
+
+.mcq-option.selected {
+  background-color: #e3f2fd;
+  border-color: #2196f3;
+}
+
+.mcq-option-letter-radio {
+  display: flex;
+  align-items: center;
+  padding: calc(14px * var(--zoom-factor)) calc(15px * var(--zoom-factor));
+  background-color: rgb(214, 235, 255);
+  border-right: calc(1px * var(--zoom-factor)) solid #dee2e6;
+}
+
+.mcq-option-letter {
+  font-weight: bold;
+  margin-right: calc(12px * var(--zoom-factor));
+  font-family: Calibri, Arial, sans-serif;
+}
+
+.mcq-option-radio-visual {
+  width: calc(18px * var(--zoom-factor));
+  height: calc(18px * var(--zoom-factor));
+  border: calc(2px * var(--zoom-factor)) solid #000;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+}
+
+.mcq-option-radio-visual.selected::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(8px * var(--zoom-factor));
+  height: calc(8px * var(--zoom-factor));
+  background-color: #000;
+  border-radius: 50%;
+}
+
+.mcq-option-text {
+  flex-grow: 1;
+  padding: calc(14px * var(--zoom-factor)) calc(15px * var(--zoom-factor));
+  font-family: Calibri, Arial, sans-serif;
+}
+
+.eliminate-choice-btn {
+  background-color: white;
+  border: none;
+  border-radius: 0;
+  width: calc(53px * var(--zoom-factor));
+  font-size: calc(20px * var(--zoom-factor));
+  cursor: pointer;
+  margin-left: 0;
+  flex-shrink: 0;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.eliminate-choice-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.ec-dash-wrapper {
+  width: calc(22px * var(--zoom-factor));
+  height: calc(22px * var(--zoom-factor));
+  border: calc(1px * var(--zoom-factor)) solid #676767;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.eliminate-choice-btn:hover:not(:disabled) {
+  background-color: #e9ecef;
+}
+
+.dimmed-choice {
+  opacity: 0.5;
+  background-color: #f8f9fa;
+}
+
+.dimmed-choice .mcq-option-letter-radio {
+  background-color: #dbe6f0;
+}
+
+.dimmed-choice .eliminate-choice-btn {
+  background-color: #e9ecef;
+  color: #adb5bd;
+  cursor: not-allowed;
+}
+
+.clear-answer-btn {
+  box-sizing: border-box;
+  min-width: 0px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  font-family: Calibri, Arial, sans-serif;
+  line-height: 1;
+  font-size: calc(22px * var(--zoom-factor));
+  z-index: 200;
+  padding: calc(8px * var(--zoom-factor)) calc(12px * var(--zoom-factor));
+  color: rgb(36, 120, 204);
+  background-color: rgb(255, 255, 255);
+  border: calc(1px * var(--zoom-factor)) solid rgb(144, 144, 144);
+  margin-top: calc(19px * var(--zoom-factor));
+  gap: calc(8px * var(--zoom-factor));
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, color 0.2s;
+  border-radius: calc(4px * var(--zoom-factor));
+}
+
+.clear-answer-btn:hover {
+  background-color: #f8f9fa;
+}
+
+.submit-container {
+  padding: calc(23px * var(--zoom-factor)) calc(30px * var(--zoom-factor)) calc(30px * var(--zoom-factor)) calc(30px * var(--zoom-factor));
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: calc(9px * var(--zoom-factor));
+  border-top: calc(1px * var(--zoom-factor)) solid #dee2e6;
+  margin-top: calc(20px * var(--zoom-factor));
+  font-family: Calibri, Arial, sans-serif;
+}
+
+.submit-btn {
+  background-color: #2478cc;
+  font-size: calc(22.8px * var(--zoom-factor));
+  color: white;
+  border: none;
+  padding: calc(11px * var(--zoom-factor)) calc(30px * var(--zoom-factor));
+  border-radius: calc(4px * var(--zoom-factor));
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-family: Calibri, Arial, sans-serif;
+}
+
+.submit-btn:hover {
+  background-color: #1e5aa3;
+}
