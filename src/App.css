@@ -137,6 +137,17 @@ p, h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
 }
 
+/* Set column heights for method-1 and method-2 to enable scrolling */
+.method-1 .column {
+  height: calc(100vh - 120px); /* Viewport height minus toolbar */
+  overflow: visible; /* Allow More-Top button to show outside column bounds */
+}
+
+.method-2 .column {
+  height: calc(100vh - 120px); /* Viewport height minus toolbar */
+  overflow: visible; /* Allow More-Top button to show outside column bounds */
+}
+
 /* Current: Allow columns to expand to content height */
 .current .column {
   overflow: visible; /* Allow content to expand beyond viewport */
@@ -213,12 +224,12 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 .inner-frame .scrollable-inner-frame::-webkit-scrollbar-thumb {
-  background: #1e3a8a;
+  background: #2478cc;
   border-radius: calc(var(--base-border-radius) * var(--zoom-factor));
 }
 
 .inner-frame .scrollable-inner-frame::-webkit-scrollbar-thumb:hover {
-  background: #1e40af;
+  background: #2478cc;
 }
 
 /* Method 1: Scalable padding via CSS variables */
@@ -258,12 +269,12 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 .method-2 .show-native-scrollbar .column-content::-webkit-scrollbar-thumb {
-  background: #1e3a8a;
+  background: #2478cc;
   border-radius: 4px;
 }
 
 .method-2 .show-native-scrollbar .column-content::-webkit-scrollbar-thumb:hover {
-  background: #1e40af;
+  background: #2478cc;
 }
 
 .method-2 .show-native-scrollbar .column-content::-webkit-scrollbar-button:vertical:start:decrement {
@@ -428,18 +439,18 @@ p, h1, h2, h3, h4, h5, h6 {
 
 /* Placeholder Image Styles */
 .placeholder-image {
-  width: 400px;
-  height: 300px; /* 4:3 aspect ratio */
+  width: calc(400px * var(--zoom-factor));
+  height: calc(300px * var(--zoom-factor)); /* 4:3 aspect ratio */
   background-color: #e0e0e0;
-  border: 2px solid #ccc;
-  border-radius: 4px;
+  border: calc(2px * var(--zoom-factor)) solid #ccc;
+  border-radius: calc(4px * var(--zoom-factor));
   display: flex;
   align-items: center;
   justify-content: center;
   margin: auto;
-  margin-bottom: 16px;
+  margin-bottom: calc(16px * var(--zoom-factor));
   color: #666;
-  font-size: 14px;
+  font-size: calc(14px * var(--zoom-factor));
   font-weight: 500;
 }
 
@@ -453,12 +464,12 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 .method-1 .column-content::-webkit-scrollbar-thumb {
-  background: #1e3a8a;
+  background: #2478cc;
   border-radius: 4px;
 }
 
 .method-1 .column-content::-webkit-scrollbar-thumb:hover {
-  background: #1e40af;
+  background: #2478cc;
 }
 
 .method-1 .column-content::-webkit-scrollbar-button:vertical:start:decrement {
@@ -490,12 +501,12 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 .outer-container::-webkit-scrollbar-thumb {
-  background: #1e3a8a;
+  background: #2478cc;
   border-radius: 4px;
 }
 
 .outer-container::-webkit-scrollbar-thumb:hover {
-  background: #1e40af;
+  background: #2478cc;
 }
 
 .outer-container::-webkit-scrollbar-button:horizontal:start:decrement {
@@ -561,6 +572,7 @@ p, h1, h2, h3, h4, h5, h6 {
   background-color: white;
   font-size: 14px;
   cursor: pointer;
+  width: 200px;
 }
 
 .zoom-controls {
@@ -657,7 +669,7 @@ p, h1, h2, h3, h4, h5, h6 {
 
 .sticky-scrollbar-thumb {
   width: 100%;
-  background: #1e3a8a;
+  background: #2478cc;
   border-radius: 4px;
   position: absolute;
   cursor: pointer;
@@ -665,7 +677,7 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 .sticky-scrollbar-thumb:hover {
-  background: #1e40af;
+  background: #2478cc;
 }
 
 .method-2 .sticky-scrollbar.visible {

@@ -14,6 +14,34 @@ const TopToolbar = ({
   const currentModeInfo = availableModes.find(mode => mode.id === currentMode)
   const explainerText = currentModeInfo ? currentModeInfo.description : ''
 
+  // Simple text formatter that handles bold text and line breaks
+  const formatText = (text) => {
+    if (!text) return null
+
+    // Split by double line breaks to create paragraphs
+    const paragraphs = text.split('\n\n')
+    
+    return paragraphs.map((paragraph, index) => {
+      // Handle bold text within each paragraph
+      const parts = paragraph.split(/(\*\*.*?\*\*)/g)
+      
+      const formattedParts = parts.map((part, partIndex) => {
+        if (part.startsWith('**') && part.endsWith('**')) {
+          // Remove the ** markers and make it bold
+          const boldText = part.slice(2, -2)
+          return <strong key={partIndex}>{boldText}</strong>
+        }
+        return part
+      })
+
+      return (
+        <p key={index} style={{ marginBottom: index < paragraphs.length - 1 ? '12px' : '0' }}>
+          {formattedParts}
+        </p>
+      )
+    })
+  }
+
   return (
     <div className="top-toolbar">
       <div className="toolbar-content">
@@ -71,7 +99,7 @@ const TopToolbar = ({
         {/* Right side - Explainer Text (70%) */}
         <div className="explainer-section">
           <div className="explainer-text">
-            {explainerText}
+            {formatText(explainerText)}
           </div>
         </div>
       </div>
