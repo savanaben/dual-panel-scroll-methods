@@ -88,7 +88,7 @@ const TopToolbar = ({
               className="mode-dropdown"
             >
               {availableModes.map(mode => (
-                <option key={mode.id} value={mode.id}>
+                <option key={mode.id} value={mode.id} disabled={mode.disabled}>
                   {mode.name}
                 </option>
               ))}
